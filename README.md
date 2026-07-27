@@ -35,5 +35,8 @@ Features:
 
 - Difference between `List` and `ArrayList`
 - Why repositories own collections
+### Reflection
+
+Today I stopped memorizing Java and started thinking about software design.
 - How responsibility affects where methods belong
 - Thinking about business logic before writing Java code
