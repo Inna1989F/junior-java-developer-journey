@@ -20,8 +20,8 @@ public class Product {
     public BigDecimal getPrice() {
         return price;
     }
-    @Override
+@Override
     public String toString() {
-        return name + " -$" + price;
+        return "Product{name='" + name + "', price=" + price + "}";
     }
 }

@@ -59,3 +59,24 @@ Prevent adding duplicate products to the repository.
 ### Reflection
 Today I realized that my biggest challenge is not programming logic but Java syntax. 
 Building the algorithm first and then translating it into Java makes learning much easier.
+
+Day 7 – Object Representation (toString())
+Business Task
+
+QA reported that products were displayed as technical object references (Product@6d06d69c) instead of readable information. The task was to make product output understandable for warehouse employees.
+
+Features Implemented
+Implemented toString() in the Product class.
+Learned how System.out.println() automatically calls toString().
+Displayed products in a human-readable format.
+Verified that products must be added to the repository before they appear in the product list.
+What I Learned
+Every Java object inherits toString() from the Object class.
+If toString() is not overridden, Java prints the class name and hash code.
+The Product class is responsible for representing itself as text.
+Creating an object and storing it in a repository are two separate operations.
+println(object) automatically invokes object.toString().
+Reflection
+
+Today I learned that objects should be responsible not only for storing their own data but also for presenting themselves. I also understood that simply creating an object does not automatically add it to a collection.
+Data must be explicitly stored in the repository before it can be retrieved.
