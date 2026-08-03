@@ -6,6 +6,7 @@ import com.inna.journey.repository.ProductRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,6 +21,12 @@ public class Main {
 repository.add(product);
 repository.add(product1);
         List<Product> products = repository.getAll();
+Optional<Product> result = repository.findByName("Key");
+if(result.isPresent()) {
+    System.out.println(result);
+}else{
+    System.out.println("This product not found.");
+}
 
         System.out.println(products);
         System.out.println(product);

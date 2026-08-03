@@ -80,3 +80,25 @@ Reflection
 
 Today I learned that objects should be responsible not only for storing their own data but also for presenting themselves. I also understood that simply creating an object does not automatically add it to a collection.
 Data must be explicitly stored in the repository before it can be retrieved.
+
+## Day 8
+
+### Business Task
+Implement product search by name for warehouse employees and store managers.
+
+### Features
+- Added `findByName(String name)` method.
+- Implemented sequential search through the product repository.
+- Returned `Optional<Product>` instead of `null`.
+- Tested both successful and unsuccessful search scenarios.
+
+### What I Learned
+- A search method should return the object itself, not just a boolean.
+- `Optional` is a container that may or may not contain a value.
+- `Optional.of()` represents a found object.
+- `Optional.empty()` represents the absence of a result.
+- `get()` should only be called after checking `isPresent()`.
+
+### Reflection
+Today I finally understood why `Optional` exists. It is not just another Java class but a safe way to express that a value may be missing.
+I also realized that business requirements determine whether a missing result should be handled with `Optional` or with an exception.

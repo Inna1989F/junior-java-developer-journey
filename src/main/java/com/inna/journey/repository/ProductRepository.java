@@ -4,6 +4,7 @@ import com.inna.journey.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ProductRepository {
     private List<Product> products = new ArrayList<>();
@@ -26,6 +27,14 @@ products.add(product);
         }
             return false;
         
+    }
+    public Optional<Product> findByName(String name){
+        for(Product product : products){
+            if (product.getName().equals(name)) {
+                return Optional.of(product);
+            }
+        }
+        return Optional.empty();
     }
 }
 
