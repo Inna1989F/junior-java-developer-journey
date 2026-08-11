@@ -14,23 +14,16 @@ public class Main {
         );
 
         ProductRepository repository = new ProductRepository();
-        Product product = new Product(
-                "Keyboard", new BigDecimal("79.99")
-        );
-        Product product1 = new Product("Coffee", new BigDecimal("12.99"));
-repository.add(product);
-repository.add(product1);
-        List<Product> products = repository.getAll();
-Optional<Product> result = repository.findByName("Key");
-if(result.isPresent()) {
-    System.out.println(result);
-}else{
-    System.out.println("This product not found.");
+        repository.add(new Product("Laptop", new BigDecimal("999.99")));
+        repository.add(new Product("Mouse", new BigDecimal("29.99")));
+        repository.add(new Product("Keyboard", new BigDecimal("79.99")));
+        repository.add(new Product("Monitor", new BigDecimal("199.99")));
+        repository.add(new Product("USB Cable", new BigDecimal("9.99")));
+        System.out.println("Cheaper than 100");
+        System.out.println(repository.findCheaperThan(new BigDecimal("100")));
+
+        System.out.println("More expensive than 100");
+        System.out.println(repository.findExpensiveThan(new BigDecimal("100")));
+}
 }
 
-        System.out.println(products);
-        System.out.println(product);
-        System.out.println(product.getPrice());
-        System.out.println(product1.isCheaperThan(new BigDecimal("100")));
-        }
-    }

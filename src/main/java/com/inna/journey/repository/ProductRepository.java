@@ -2,6 +2,7 @@ package com.inna.journey.repository;
 
 import com.inna.journey.model.Product;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +36,25 @@ products.add(product);
             }
         }
         return Optional.empty();
+    }
+    public List<Product> findCheaperThan(BigDecimal maxPrice) {
+        List<Product> result = new ArrayList<>();
+
+        for(Product product : products) {
+            if(product.getPrice().compareTo(maxPrice) < 0) {
+                result.add(product);
+            }
+        }
+        return result;
+    }
+    public List<Product> findExpensiveThan(BigDecimal minPrice) {
+        List<Product> result1 = new ArrayList<>();
+        for(Product product: products) {
+            if(product.getPrice().compareTo(minPrice) > 0) {
+                result1.add(product);
+            }
+        }
+        return result1;
     }
 }
 

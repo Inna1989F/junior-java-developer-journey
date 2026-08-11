@@ -102,3 +102,30 @@ Implement product search by name for warehouse employees and store managers.
 ### Reflection
 Today I finally understood why `Optional` exists. It is not just another Java class but a safe way to express that a value may be missing.
 I also realized that business requirements determine whether a missing result should be handled with `Optional` or with an exception.
+
+## Day 9 - Product Filtering
+
+Today I added price-based filtering to `ProductRepository`.
+
+Implemented:
+- `findCheaperThan(BigDecimal maxPrice)`
+- `findMoreExpensiveThan(BigDecimal minPrice)`
+- filtering products using `BigDecimal.compareTo()`
+- testing repository methods in `Main`
+- checking results in the console
+
+Example:
+
+```java
+repository.findCheaperThan(new BigDecimal("100"));
+repository.findMoreExpensiveThan(new BigDecimal("100"));
+
+What I practiced:
+
+working with List<Product>
+for-each loops
+BigDecimal
+compareTo()
+returning a new filtered list without changing the original list
+testing repository behavior manually through Main
+
