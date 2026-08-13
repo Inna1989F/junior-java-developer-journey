@@ -37,24 +37,5 @@ products.add(product);
         }
         return Optional.empty();
     }
-    public List<Product> findCheaperThan(BigDecimal maxPrice) {
-        List<Product> result = new ArrayList<>();
-
-        for(Product product : products) {
-            if(product.getPrice().compareTo(maxPrice) < 0) {
-                result.add(product);
-            }
-        }
-        return result;
-    }
-    public List<Product> findExpensiveThan(BigDecimal minPrice) {
-        List<Product> result1 = new ArrayList<>();
-        for(Product product: products) {
-            if(product.getPrice().compareTo(minPrice) > 0) {
-                result1.add(product);
-            }
-        }
-        return result1;
-    }
 }
 

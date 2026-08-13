@@ -129,3 +129,42 @@ compareTo()
 returning a new filtered list without changing the original list
 testing repository behavior manually through Main
 
+
+Day 10 - Service Layer and Separation of Responsibilities
+
+Today I introduced a ProductService layer and separated business logic from data storage.
+
+Implemented:
+
+created ProductService
+injected ProductRepository through the constructor
+made the repository dependency final
+moved price filtering logic from ProductRepository to ProductService
+used repository.getAll() to access products from the service
+separated repository responsibilities from business logic
+
+Current responsibilities:
+
+ProductRepository
+
+stores products
+adds products
+returns all products
+finds a product by name
+
+ProductService
+
+filters products by price
+contains business logic related to products
+
+What I practiced:
+
+Single Responsibility Principle (SRP)
+constructor dependency injection
+separation between Repository and Service layers
+working with object references
+understanding final with reference types
+
+Important:
+final prevents a reference from being reassigned to another object,
+ but it does not make the referenced object immutable.
