@@ -168,3 +168,54 @@ understanding final with reference types
 Important:
 final prevents a reference from being reassigned to another object,
  but it does not make the referenced object immutable.
+        
+        
+## Day 11 - Repository Abstraction and Dependency Inversion
+
+Today I refactored the repository layer to depend on an abstraction instead of a concrete implementation.
+
+Implemented:
+
+* converted `ProductRepository` from a class to an interface
+* kept repository method contracts inside `ProductRepository`
+* created `InMemoryProductRepository`
+* implemented `ProductRepository` in `InMemoryProductRepository`
+* moved the in-memory product storage and method implementations to `InMemoryProductRepository`
+* updated `Main` to use the repository interface
+* kept `ProductService` dependent on the `ProductRepository` abstraction
+
+Current structure:
+
+```text
+ProductService
+      ↓
+ProductRepository
+    (interface)
+      ↑
+      │ implements
+InMemoryProductRepository
+      ↓
+List<Product>
+```
+
+What I practiced:
+
+* Java interfaces
+* `implements`
+* programming to an interface
+* abstraction vs implementation
+* Dependency Inversion Principle
+* constructor dependency injection
+* separating business logic from data access implementation
+
+Example:
+
+```java
+ProductRepository repository =
+        new InMemoryProductRepository();
+
+ProductService service =
+        new ProductService(repository);
+```
+
+This allows the repository implementation to be replaced later without changing the business logic in `ProductService`.
