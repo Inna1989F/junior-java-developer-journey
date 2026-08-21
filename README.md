@@ -219,3 +219,43 @@ ProductService service =
 ```
 
 This allows the repository implementation to be replaced later without changing the business logic in `ProductService`.
+Day 12 - Introduction to Unit Testing with JUnit 5
+
+Today I started adding unit tests to the project using JUnit 5.
+
+Implemented:
+
+added JUnit 5 dependency to Maven
+created InMemoryProductRepositoryTest
+wrote a test for adding a valid product
+wrote a test for adding a duplicate product
+tested expected exceptions with assertThrows()
+intentionally broke the add() method to verify that the test detects incorrect behavior
+
+Example test scenarios:
+
+GIVEN → an empty repository
+WHEN  → a valid product is added
+THEN  → the repository contains exactly this product
+GIVEN → a repository already containing "Mouse"
+WHEN  → another product named "Mouse" is added
+THEN  → IllegalArgumentException is thrown
+
+What I practiced:
+
+JUnit 5
+@Test
+assertEquals(expected, actual)
+assertThrows()
+Arrange → Act → Assert
+Given → When → Then
+positive and negative test scenarios
+test naming convention: <methodUnderTest>_<state>_<expectedBehavior>
+understanding that one test represents one behavior scenario, but can contain multiple related assertions
+
+Important lesson:
+
+A passing test does not prove that the whole method works correctly. It only proves that the specific scenario covered by that test currently behaves as expected.
+
+By intentionally removing duplicate validation from add(), I saw that the valid-product test still passed while the duplicate-product test failed.
+This demonstrated why different behavior scenarios need separate tests.
