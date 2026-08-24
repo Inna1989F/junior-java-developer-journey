@@ -51,4 +51,23 @@ public class InMemoryProductRepositoryTest {
                 () -> repository.add(secondMouse)
         );
         }
+        @Test
+    void findByName_existingProductReturned() {
+        ProductRepository repository = new InMemoryProductRepository();
+        Product mouse =
+                new Product("Mouse", new BigDecimal("29.99"));
+        repository.add(mouse);
+        Optional<Product> result = repository.findByName("Mouse");
+        assertTrue(result.isPresent());
+        assertEquals(mouse, result.get());
+
+        }
+        @Test
+    void findByName_nonExistingProduct_emptyOptionalReturned() {
+        ProductRepository repository = new InMemoryProductRepository();
+
+        Optional<Product> result = repository.findByName("iphone");
+
+        assertTrue(result.isEmpty());
+        }
     }

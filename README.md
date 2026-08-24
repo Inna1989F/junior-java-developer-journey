@@ -259,3 +259,55 @@ A passing test does not prove that the whole method works correctly. It only pro
 
 By intentionally removing duplicate validation from add(), I saw that the valid-product test still passed while the duplicate-product test failed.
 This demonstrated why different behavior scenarios need separate tests.
+
+## Day 14 - Testing Repository Search with Optional
+
+Today I continued practicing unit testing with JUnit 5.
+
+Implemented:
+- added tests for `findByName()`
+- tested successful product search
+- tested search for a non-existing product
+- practiced testing methods that return `Optional`
+- learned not to test private helper methods directly
+
+Test scenarios:
+
+### Existing product
+
+GIVEN:
+- repository contains `Mouse`
+
+WHEN:
+- `findByName("Mouse")` is called
+
+THEN:
+- the returned `Optional` contains a value
+- the returned product is `Mouse`
+
+### Non-existing product
+
+GIVEN:
+- repository does not contain `iPhone`
+
+WHEN:
+- `findByName("iPhone")` is called
+
+THEN:
+- `Optional.empty()` is returned
+
+What I practiced:
+- `assertTrue()`
+- `Optional.isPresent()`
+- `Optional.isEmpty()`
+- `Optional.get()`
+- combining related assertions in one test
+- testing public behavior instead of private implementation details
+
+Example:
+
+```java
+Optional<Product> result = repository.findByName("Mouse");
+
+assertTrue(result.isPresent());
+assertEquals(mouse, result.get());
