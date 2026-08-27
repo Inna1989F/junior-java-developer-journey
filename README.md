@@ -311,3 +311,82 @@ Optional<Product> result = repository.findByName("Mouse");
 
 assertTrue(result.isPresent());
 assertEquals(mouse, result.get());
+
+## Day 15 - Boundary Testing for Product Filtering
+
+Today I practiced testing boundary conditions for price filtering in `ProductService`.
+
+Implemented:
+
+* created tests for `findCheaperThan()`
+* tested a normal filtering scenario with multiple matching products
+* tested the exact price boundary
+* separated service tests from repository tests
+* verified that `ProductService` is tested independently from `InMemoryProductRepository`
+
+Test scenarios:
+
+### Normal filtering
+
+GIVEN:
+
+* `Mouse` costs `29.99`
+* `Keyboard` costs `59.99`
+* `Monitor` costs `199.99`
+
+WHEN:
+
+* `findCheaperThan(60.00)` is called
+
+THEN:
+
+* two products are returned
+* the result contains `Mouse`
+* the result contains `Keyboard`
+
+### Boundary case
+
+GIVEN:
+
+* `Mouse` costs `29.99`
+* `Keyboard` costs exactly `30.00`
+* `Monitor` costs `199.99`
+
+WHEN:
+
+* `findCheaperThan(30.00)` is called
+
+THEN:
+
+* only `Mouse` is returned
+* a product with the exact boundary price is not included
+
+What I practiced:
+
+* testing `List<Product>`
+* checking collection size
+* checking collection contents
+* boundary testing
+* verifying the difference between `<` and `<=`
+* separating `ProductServiceTest` from `InMemoryProductRepositoryTest`
+* testing one method with multiple behavior scenarios
+
+Example:
+
+```java
+List<Product> result =
+        service.findCheaperThan(new BigDecimal("30.00"));
+
+assertEquals(1, result.size());
+assertEquals(mouse, result.get(0));
+```
+
+Important lesson:
+
+One method can require several different tests.
+
+A normal scenario checks that filtering works in general.
+
+A boundary scenario checks that the exact condition is implemented correctly. For `findCheaperThan()`, a product with the same price as the limit must not be included.
+
+Service logic should be tested in `ProductServiceTest`, while repository behavior should be tested in `InMemoryProductRepositoryTest`.

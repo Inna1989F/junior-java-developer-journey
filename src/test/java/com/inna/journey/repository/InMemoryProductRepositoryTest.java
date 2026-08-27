@@ -1,8 +1,10 @@
 package com.inna.journey.repository;
 import com.inna.journey.model.Product;
+import com.inna.journey.service.ProductService;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,21 +23,23 @@ public class InMemoryProductRepositoryTest {
         assertEquals(1, repository.getAll().size());
         assertEquals(mouse, repository.getAll().get(0));
     }
-        @Test
-          void findByName_existingProduct_productReturned() {
-            ProductRepository repository = new InMemoryProductRepository();
-            Product mouse =
-                    new Product("Mouse", new BigDecimal("29.99"));
 
-            repository.add(mouse);
+    @Test
+    void findByName_existingProduct_productReturned() {
+        ProductRepository repository = new InMemoryProductRepository();
+        Product mouse =
+                new Product("Mouse", new BigDecimal("29.99"));
 
-            Optional<Product> result = repository.findByName("Mouse");
+        repository.add(mouse);
 
-            assertTrue(result.isPresent());
-            assertEquals(mouse, result.get());
-        }
-        @Test
-          void add_duplicateName_notOk() {
+        Optional<Product> result = repository.findByName("Mouse");
+
+        assertTrue(result.isPresent());
+        assertEquals(mouse, result.get());
+    }
+
+    @Test
+    void add_duplicateName_notOk() {
         ProductRepository repository = new InMemoryProductRepository();
 
         Product firstMouse =
@@ -50,8 +54,9 @@ public class InMemoryProductRepositoryTest {
                 IllegalArgumentException.class,
                 () -> repository.add(secondMouse)
         );
-        }
-        @Test
+    }
+
+    @Test
     void findByName_existingProductReturned() {
         ProductRepository repository = new InMemoryProductRepository();
         Product mouse =
@@ -61,13 +66,14 @@ public class InMemoryProductRepositoryTest {
         assertTrue(result.isPresent());
         assertEquals(mouse, result.get());
 
-        }
-        @Test
+    }
+
+    @Test
     void findByName_nonExistingProduct_emptyOptionalReturned() {
         ProductRepository repository = new InMemoryProductRepository();
 
         Optional<Product> result = repository.findByName("iphone");
 
         assertTrue(result.isEmpty());
-        }
     }
+}
