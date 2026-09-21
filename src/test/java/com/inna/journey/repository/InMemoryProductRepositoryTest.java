@@ -76,4 +76,19 @@ public class InMemoryProductRepositoryTest {
 
         assertTrue(result.isEmpty());
     }
+    @Test
+    void getAll_modifyReturnedList_repositoryNotChanged() {
+        ProductRepository repository = new InMemoryProductRepository();
+
+        Product mouse = new Product("Mouse", new BigDecimal("29.99"));
+        Product keyboard = new Product("Keyboard", new BigDecimal("59.99"));
+
+        repository.add(mouse);
+        repository.add(keyboard);
+
+        List<Product> result = repository.getAll();
+
+        result.clear();
+        assertEquals(2, repository.getAll().size());
+    }
 }

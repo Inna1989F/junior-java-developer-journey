@@ -13,6 +13,7 @@ public class ProductService {
     public ProductService(ProductRepository repository) {
         this.repository = repository;
     }
+
     public List<Product> findCheaperThan(BigDecimal maxPrice) {
         List<Product> result = new ArrayList<>();
 

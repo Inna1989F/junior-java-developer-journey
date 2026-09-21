@@ -1,11 +1,13 @@
 package com.inna.journey.repository;
 
+import com.inna.journey.annotation.Component;
 import com.inna.journey.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class InMemoryProductRepository implements ProductRepository {
     private List<Product> products = new ArrayList<>();
 
@@ -19,7 +21,8 @@ public class InMemoryProductRepository implements ProductRepository {
 
     }
     public List<Product> getAll(){
-        return products;
+
+        return new ArrayList<>(products);
     }
     private boolean containsProduct(String name) {
         for(Product product: products) {

@@ -390,3 +390,59 @@ A normal scenario checks that filtering works in general.
 A boundary scenario checks that the exact condition is implemented correctly. For `findCheaperThan()`, a product with the same price as the limit must not be included.
 
 Service logic should be tested in `ProductServiceTest`, while repository behavior should be tested in `InMemoryProductRepositoryTest`.
+
+## Day 17 — Logging with Log4j2
+
+Today I learned how logging works in a Java application using Log4j2.
+
+### What I learned
+
+- Added Log4j2 dependencies to Maven:
+    - `log4j-api`
+    - `log4j-core`
+- Created `log4j2.xml` in `src/main/resources`.
+- Learned that a `Logger` is used to record application events.
+- Created a logger using:
+
+```java
+private static final Logger logger =
+        LogManager.getLogger(Main.class);
+Learned about logging levels:
+INFO — normal application events
+WARN — something unexpected happened, but the application can continue
+ERROR — an operation failed
+Learned that the Root level controls which log messages are recorded.
+Learned that an Appender defines where logs are sent.
+Configured a File appender instead of a console appender.
+Successfully wrote logs to logs/app.log.
+Log4j2 configuration
+<File name="File" fileName="logs/app.log">
+    <PatternLayout
+        pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+</File>
+<Root level="error">
+    <AppenderRef ref="File"/>
+</Root>
+
+With level="error", only ERROR messages are written to the log file.
+
+Example
+logger.info("Application started");
+logger.warn("This is WARN");
+logger.error("This is ERROR");
+
+With the current ERROR level, only:
+
+This is ERROR
+
+is written to:
+
+logs/app.log
+Key takeaway
+
+Logging flow:
+
+Logger → Log level → Appender → logs/app.log
+
+Log4j2 allows application events and errors
+ to be recorded without using System.out.println().
